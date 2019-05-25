@@ -104,7 +104,7 @@ Constructor takes one argument that is array of objects with this shape:
 }
 ```
 
-**Breakpoint ranges must be continuous from `0` to `Infinity`.**
+**⚠️ ⚠️ ⚠️ Breakpoint ranges must be continuous from `0` to `Infinity`. ⚠️ ⚠️ ⚠️**
 
 ### Base functions
 
