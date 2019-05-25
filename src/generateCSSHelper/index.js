@@ -5,5 +5,11 @@ import generateMediaQueryLabels from "./generateMediaQueryLabels";
 export default function generateCSSHelper(breakpoints, args) {
   return compressBreakpoints(breakpoints)
     .map(generateMediaQueryLabels)
-    .map(mediaQueryLabel => `${mediaQueryLabel} {${css(...args)}}`);
+    .map(
+      mediaQueryLabel => css`
+        ${mediaQueryLabel} {
+          ${css(...args)}
+        }
+      `
+    );
 }
