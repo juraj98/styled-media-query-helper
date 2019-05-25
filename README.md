@@ -93,13 +93,13 @@ const media = Media([{
 Constructor takes one argument that is array of objects with this shape:
 ```javascript
 {
-  // name for the breakpoint. Must be unique
+  // Name for the breakpoint. Must be unique
   name: String,
 
-  // number of pixels that will mark start of this breakpoint. Can be ommited for the first breakpoint. 
+  // Number of pixels that will mark the start of this breakpoint. Can be ommited for the first breakpoint. 
   rangeStart: Number,
 
-  // number of pixels that will mark end of this breakpoint. Can be ommited for the last breakpoint.
+  // Number of pixels that will mark the end of this breakpoint. Can be ommited for the last breakpoint.
   rangeEnd: Number,
 }
 ```
