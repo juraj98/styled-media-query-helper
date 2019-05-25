@@ -16,19 +16,19 @@
 - [Media](#media)
   * [constructor(breakpoints)](#media)
   * [Base functions](#base-functions)
-    * [up(breakpointName)](#up-breakpointName)
-    * [upAnd(breakpointName)](#upAnd-breakpointName)
-    * [down(breakpointName)](#down-breakpointName)
-    * [downAnd(breakpointName)](#downAnd-breakpointName)
-    * [only(breakpointName)](#only-breakpointName)
-    * [not(breakpointName)](#not-breakpointName)
-    * [between(start, end)](#between-start-end)
-    * [betweenAnd(start, end)](#betweenAnd-start,-end)
-    * [outside(start, end)](#outside-start-end)
-    * [outsiteAnd(start, end)](#outsiteAnd-start-end)
+    * [up(breakpointName)](#upbreakpointname)
+    * [upAnd(breakpointName)](#upandbreakpointname)
+    * [down(breakpointName)](#downbreakpointname)
+    * [downAnd(breakpointName)](#downandbreakpointname)
+    * [only(breakpointName)](#onlybreakpointname)
+    * [not(breakpointName)](#notbreakpointname)
+    * [between(start, end)](#betweenstart-end)
+    * [betweenAnd(start, end)](#betweenandstart-end)
+    * [outside(start, end)](#outsidestart-end)
+    * [outsiteAnd(start, end)](#outsiteandstart-end)
   * [Extension functions](#extension-functions)
-    * [with(breakpointName)](#with-breakpointName)
-    * [without(breakpointName)](#without-breakpointName)
+    * [with(breakpointName)](#withbreakpointname)
+    * [without(breakpointName)](#withoutbreakpointname)
 
 ### Basic Example
 
@@ -162,7 +162,7 @@ Captures every breakpoint outside of speficied reange, including specified break
 
 `media.outsideAnd("small", "large")` ➡ `@media (max-width: 757px)`, `@media (min-width: 992px)`
 
-#### Extension functions
+### Extension functions
 
 Extension functions are included on functions returned from `base fucntions` and can be used to extend or narrow specified range.
 
