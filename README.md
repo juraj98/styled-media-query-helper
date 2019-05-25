@@ -49,7 +49,7 @@ const Button = styled.button`
   hegiht: 50px;
   background-color: red;
 
-  ${media.upAnd("medium").with("tiny").widtout("extraLarge")`
+  ${media.upAnd("medium").with("tiny").without("extraLarge")`
     background-color: blue;
   `}
 `;
