@@ -1,6 +1,6 @@
 {
-  "name": "styled-media-query",
-  "version": "0.1.0",
+  "name": "styled-query-media-helper",
+  "version": "1.0.0",
   "description": "",
   "main": "build/index.js",
   "scripts": {
