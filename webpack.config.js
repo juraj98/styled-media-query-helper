@@ -1,14 +1,15 @@
 const path = require("path");
 
-module.exports = {
+module.exports = env => ({
   entry: "./src/index.js",
   devtool: "source-map",
-  mode: "none",
+  mode: env.production ? "production" : "development",
   output: {
     path: path.resolve(__dirname, "build"),
     filename: "index.js",
     libraryTarget: "commonjs2"
   },
+
   module: {
     rules: [
       {
@@ -24,7 +25,8 @@ module.exports = {
       }
     ]
   },
+
   externals: {
     react: "commonjs react"
   }
-};
+});
