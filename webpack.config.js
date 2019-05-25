@@ -1,7 +1,8 @@
-var path = require("path");
+const path = require("path");
 
 module.exports = {
-  entry: "./index.js",
+  entry: "./src/index.js",
+  devtool: "source-map",
   output: {
     path: path.resolve(__dirname, "build"),
     filename: "index.js",
@@ -11,7 +12,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        include: __dirname + "/",
+        include: __dirname,
         exclude: /(node_modules|bower_components|build)/,
         use: {
           loader: "babel-loader",

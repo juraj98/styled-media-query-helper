@@ -1,0 +1,20 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["airbnb-base", "prettier"],
+  "plugins": ["import", "prettier"],
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "ecmaFeatures": {
+      "modules": true
+    },
+    "sourceType": "module"
+  },
+  "settings": {
+    "node": {
+      "paths": ["src"]
+    }
+  },
+  "rules": {
+    "no-underscore-dangle": ["error", { "allowAfterThis": true }]
+  }
+}
