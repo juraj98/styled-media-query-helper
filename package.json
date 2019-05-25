@@ -17,14 +17,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/juraj98/media-query-for-styled-components.git"
+    "url": "git+https://github.com/juraj98/styled-query-media-helper.git"
   },
   "author": "Juraj Garaj <juraj982@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/juraj98/media-query-for-styled-components/issues"
+    "url": "https://github.com/juraj98/styled-query-media-helper/issues"
   },
-  "homepage": "https://github.com/juraj98/media-query-for-styled-components#readme",
+  "homepage": "https://github.com/juraj98/styled-query-media-helper#readme",
   "dependencies": {
     "webpack": "^4.30.0"
   },
