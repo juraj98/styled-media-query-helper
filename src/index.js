@@ -1,5 +1,7 @@
+import { css } from "styled-components";
 import parseBreakpoints from "./parseBreakpoints";
 import generateCSSHelper from "./generateCSSHelper";
+import generateMediaQueryLabels from "./generateCSSHelper/generateMediaQueryLabels";
 import limits from "./limitFunctions";
 
 export default class Media {
@@ -159,5 +161,23 @@ export default class Media {
     );
 
     return this._getReturnFunction(correctBreakpoints);
+  }
+
+  spread(styles) {
+    return (...args) =>
+      this.breakpoints.map(({ name, rangeStart, rangeEnd }) => {
+        const styleToUse = styles[name] || styles.default;
+        const generatedCSS = css(
+          ...args.map(arg =>
+            typeof arg === "function" ? arg(styleToUse) : arg
+          )
+        );
+
+        return css`
+          ${generateMediaQueryLabels({ start: rangeStart, end: rangeEnd })} {
+            ${generatedCSS}
+          }
+        `;
+      });
   }
 }
