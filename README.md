@@ -31,6 +31,11 @@
   - [Extension functions](#extension-functions)
     - [with(breakpointName)](#withbreakpointname)
     - [without(breakpointName)](#withoutbreakpointname)
+  - [Condition functions](#condition-functions)
+    - [and(boolean)](#andboolean)
+    - [or(boolean)](#orboolean)
+  - [Special functions](#special-functions)
+    - [spread(styles)](#spreadstyles)
 
 ### Basic Example
 
@@ -109,7 +114,7 @@ Constructor takes one argument that is array of objects with this shape:
 }
 ```
 
-**⚠️ ⚠️ ⚠️ Breakpoint ranges must be continuous from `0` to `Infinity`. ⚠️ ⚠️ ⚠️**
+**⚠️ Breakpoint ranges must be continuous from `0` to `Infinity`. ⚠️**
 
 ### Base functions
 
@@ -194,6 +199,103 @@ Removed breakpoint to specified range.
 `media.up("medium")` ➡ `@media (min-width: 992px)`
 
 `media.up("medium").without("extraLarge")` ➡ `@media (min-width: 992px) and (max-width: 1399px)`
+
+### Condition functions
+
+These functions allow you to render styles based on conditions. 
+
+**⚠️ If you chain multiple condition functions, only the last one is applied. ⚠️**
+
+#### and(boolean)
+
+Applies *and* logic to your styles.
+
+`media.up("medium").and(true)` ➡ `@media (min-width: 992px)`
+
+`media.up("medium").and(false)` ➡ `null`
+
+#### or(boolean)
+
+Applies *or* logic to your styles.
+
+```javascript
+const Button = styled.div`
+  ${media.up("medium").or(false)`
+    color: blue;
+  `}
+`
+
+// ⬇⬇⬇⬇⬇⬇⬇⬇⬇
+
+const Button = styled.div`
+  @media (min-width: 992px) {
+    color: blue;
+  }
+`;
+```
+
+
+```javascript
+const Button = styled.div`
+  ${media.up("medium").or(true)`
+    color: blue;
+  `}
+`
+
+// ⬇⬇⬇⬇⬇⬇⬇⬇⬇
+
+const Button = styled.div`
+  color: blue;
+`;
+```
+
+### Special functions
+
+#### spread(styles)
+
+This function can be used to autoamticaly generate different styles for different media-queries from object.
+
+```javascript
+const styles = {
+  default: {
+    color: blue,
+    background-color: red
+  },
+  medium: {
+    color: green,
+    background-color: white
+  }
+}
+
+const Button = styled.div`
+  ${media.spread(styles)`
+    color: ${styles => styles.color};
+    background-color: ${styles => styles.background-color};
+  `}
+`;
+
+// ⬇⬇⬇⬇⬇⬇⬇⬇⬇
+
+const Button = styled.div`
+  // tiny and small screens are rendered with "default" style 
+  @media (max-width: 757) {
+    color: blue,
+    background-color: red,
+  }
+  
+  // medium screens are rendered with "medium" style 
+  @media (min-width: 758) and (max-width: 991) {
+    color: green,
+    background-color: white,
+  }
+  
+  // large and extraLarge screens are rendered with "default" style 
+  @media (max-width: 757) {
+    color: blue,
+    background-color: red,
+  }
+`;
+```
 
 ## TO-DO
 
