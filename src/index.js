@@ -37,37 +37,50 @@ export default class Media {
     });
   }
 
-  _getWithFunction(correctBreakpoints) {
+  _getWithFunction(breakpoints, conditions) {
     return breakpointName => {
-      if (
-        correctBreakpoints.some(
-          breakpoint => breakpoint.name === breakpointName
-        )
-      ) {
-        return this._getReturnFunction(correctBreakpoints);
+      if (breakpoints.some(breakpoint => breakpoint.name === breakpointName)) {
+        return this._getReturnFunction(breakpoints, conditions);
       }
 
-      return this._getReturnFunction([
-        ...correctBreakpoints,
-        this.breakpointsMap[breakpointName]
-      ]);
+      return this._getReturnFunction(
+        [...breakpoints, this.breakpointsMap[breakpointName]],
+        conditions
+      );
     };
   }
 
-  _getWithoutFunction(correctBreakpoints) {
+  _getWithoutFunction(breakpoints, conditions) {
     return breakpointName =>
       this._getReturnFunction(
-        correctBreakpoints.filter(
-          breakpoint => breakpoint.name !== breakpointName
-        )
+        breakpoints.filter(breakpoint => breakpoint.name !== breakpointName),
+        conditions
       );
   }
 
-  _getReturnFunction(correctBreakpoints) {
+  _getAndFunction(breakpoints, conditions) {
+    return boolean =>
+      this._getReturnFunction(breakpoints, {
+        ...conditions,
+        and: boolean
+      });
+  }
+
+  _getOrFunction(breakpoints, conditions) {
+    return boolean =>
+      this._getReturnFunction(breakpoints, {
+        ...conditions,
+        or: boolean
+      });
+  }
+
+  _getReturnFunction(breakpoints, conditions = {}) {
     const returnFunction = (...args) =>
-      generateCSSHelper(correctBreakpoints, args);
-    returnFunction.with = this._getWithFunction(correctBreakpoints);
-    returnFunction.without = this._getWithoutFunction(correctBreakpoints);
+      generateCSSHelper(breakpoints, args, conditions);
+    returnFunction.with = this._getWithFunction(breakpoints, conditions);
+    returnFunction.without = this._getWithoutFunction(breakpoints, conditions);
+    returnFunction.or = this._getOrFunction(breakpoints, conditions);
+    returnFunction.and = this._getAndFunction(breakpoints, conditions);
     return returnFunction;
   }
 
