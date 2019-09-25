@@ -4,9 +4,9 @@
   "description": "",
   "main": "build/index.js",
   "scripts": {
-    "prepack": "yarn build",
-    "start": "tsc ./src/index.ts --watch",
-    "build": "tsc ./src/index.ts",
+    "prepack": "npm build",
+    "start": "tsc --watch",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
