@@ -1,7 +1,9 @@
+import { BreakpointNameType, IFullBreakpoint } from "../index.d";
+
 export default function outside(
-  breakpoints,
-  startBreakpointName,
-  endBreakpointName
+  breakpoints: IFullBreakpoint[],
+  startBreakpointName: BreakpointNameType,
+  endBreakpointName: BreakpointNameType,
 ) {
   let foundStartBreakpoint = false;
   let foundEndBreakpoint = false;

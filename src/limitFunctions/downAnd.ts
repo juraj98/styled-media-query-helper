@@ -1,4 +1,9 @@
-export default function downAnd(breakpoints, breakpointName) {
+import { BreakpointNameType, IFullBreakpoint } from "../index.d";
+
+export default function downAnd(
+  breakpoints: IFullBreakpoint[],
+  breakpointName: BreakpointNameType,
+) {
   let foundRuleBreakpoint = false;
 
   const correctBreakpoints = breakpoints.filter(breakpoint => {

@@ -48,7 +48,7 @@ const media = new Media([
   { name: "small", rangeStart: 376, rangeEnd: 757 },
   { name: "medium", rangeStart: 758, rangeEnd: 991 },
   { name: "large", rangeStart: 992, rangeEnd: 1399 },
-  { name: "extraLarge", rangeStart: 1400 }
+  { name: "extraLarge", rangeStart: 1400 },
 ]);
 
 const Button = styled.button`
@@ -202,13 +202,13 @@ Removed breakpoint to specified range.
 
 ### Condition functions
 
-These functions allow you to render styles based on conditions. 
+These functions allow you to render styles based on conditions.
 
 **⚠️ If you chain multiple condition functions, only the last one is applied. ⚠️**
 
 #### and(boolean)
 
-Applies *and* logic to your styles.
+Applies _and_ logic to your styles.
 
 `media.up("medium").and(true)` ➡ `@media (min-width: 992px)`
 
@@ -216,14 +216,14 @@ Applies *and* logic to your styles.
 
 #### or(boolean)
 
-Applies *or* logic to your styles.
+Applies _or_ logic to your styles.
 
 ```javascript
 const Button = styled.div`
   ${media.up("medium").or(false)`
     color: blue;
   `}
-`
+`;
 
 // ⬇⬇⬇⬇⬇⬇⬇⬇⬇
 
@@ -234,13 +234,12 @@ const Button = styled.div`
 `;
 ```
 
-
 ```javascript
 const Button = styled.div`
   ${media.up("medium").or(true)`
     color: blue;
   `}
-`
+`;
 
 // ⬇⬇⬇⬇⬇⬇⬇⬇⬇
 
@@ -277,19 +276,19 @@ const Button = styled.div`
 // ⬇⬇⬇⬇⬇⬇⬇⬇⬇
 
 const Button = styled.div`
-  // tiny and small screens are rendered with "default" style 
+  // tiny and small screens are rendered with "default" style
   @media (max-width: 757) {
     color: blue,
     background-color: red,
   }
-  
-  // medium screens are rendered with "medium" style 
+
+  // medium screens are rendered with "medium" style
   @media (min-width: 758) and (max-width: 991) {
     color: green,
     background-color: white,
   }
-  
-  // large and extraLarge screens are rendered with "default" style 
+
+  // large and extraLarge screens are rendered with "default" style
   @media (max-width: 757) {
     color: blue,
     background-color: red,
@@ -299,8 +298,9 @@ const Button = styled.div`
 
 ## TO-DO
 
+- [x] Rewrite in typescript
+- [ ] Minificate output code
 - [ ] Add support for em and rem
-- [ ] Add types
 - [ ] Add tests using jest
 
 ## Contributing

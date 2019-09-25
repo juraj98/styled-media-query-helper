@@ -1,12 +1,12 @@
 {
   "name": "styled-media-query-helper",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "",
   "main": "build/index.js",
   "scripts": {
-    "prepack": "yarn build",
-    "start": "webpack --env.production=false --watch",
-    "build": "webpack --env.production=true",
+    "prepack": "npm build",
+    "start": "tsc --watch",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -27,21 +27,16 @@
   },
   "homepage": "https://github.com/juraj98/styled-media-query-helper#readme",
   "devDependencies": {
-    "@babel/cli": "^7.4.3",
-    "@babel/core": "^7.4.3",
-    "@babel/plugin-proposal-optional-chaining": "^7.2.0",
-    "@babel/preset-env": "^7.4.3",
-    "babel-eslint": "^10.0.1",
-    "babel-loader": "^8.0.5",
+    "@types/styled-components": "^4.1.19",
     "eslint": "^6.2.2",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.1.0",
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-prettier": "^3.1.0",
+    "prettier": "^1.18.2",
     "react-dom": "^16.8.6",
     "styled-components": "^4.2.0",
-    "webpack": "^4.30.0",
-    "webpack-cli": "^3.3.1"
+    "typescript": "^3.6.3"
   },
   "peerDependencies": {
     "styled-components": ">=4"
