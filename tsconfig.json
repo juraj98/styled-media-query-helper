@@ -10,7 +10,7 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "strict": true,
     "strictNullChecks": false,
     "suppressImplicitAnyIndexErrors": true,
@@ -19,5 +19,6 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
-  "include": ["./src/**/*"]
+  "include": ["./src/**/*"],
+  "exclude": ["./node_modules/*", "./build/*", "./.git/*"]
 }

@@ -1,4 +1,4 @@
-import { css, CSSObject } from "styled-components";
+import { css } from "styled-components";
 import parseBreakpoints from "./parseBreakpoints";
 import generateCSSHelper from "./generateCSSHelper";
 import generateMediaQueryLabels from "./generateCSSHelper/generateMediaQueryLabels";
@@ -143,6 +143,7 @@ export default class Media {
       this.breakpoints.map(({ name, rangeStart, rangeEnd }: IFullBreakpoint) => {
         const styleToUse = styles[name] || styles.default;
 
+        // @ts-ignore
         const generatedCSS = args.length === 0 ? null : css(...args.map(arg => (typeof arg === "function" ? arg(styleToUse) : arg)));
 
         return css`

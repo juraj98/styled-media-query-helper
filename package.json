@@ -5,8 +5,8 @@
   "main": "build/index.js",
   "scripts": {
     "prepack": "yarn build",
-    "start": "webpack --env.production=false --watch",
-    "build": "webpack --env.production=true",
+    "start": "tsc ./src/index.ts --watch",
+    "build": "tsc ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -27,14 +27,14 @@
   },
   "homepage": "https://github.com/juraj98/styled-media-query-helper#readme",
   "devDependencies": {
-    "@types/styled-components": "^4.1.19",
     "eslint": "^6.2.2",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.1.0",
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-prettier": "^3.1.0",
     "react-dom": "^16.8.6",
-    "styled-components": "^4.2.0"
+    "styled-components": "^4.2.0",
+    "typescript": "^3.6.3"
   },
   "peerDependencies": {
     "styled-components": ">=4"

@@ -6,6 +6,7 @@ import { IFullBreakpoint, IBreakpointConditions } from "../index.d";
 export default function generateCSSHelper(breakpoints: IFullBreakpoint[], args, conditions: IBreakpointConditions) {
   if (conditions.and === false) return null;
 
+  // @ts-ignore
   const generatedCSS = css(...args);
 
   return compressBreakpoints(breakpoints)
