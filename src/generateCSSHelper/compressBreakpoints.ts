@@ -1,7 +1,9 @@
 import { IFullBreakpoint, INamelessBreakpoint } from "../index.d";
 
 export default function compressBreakpoints(breakpoints: IFullBreakpoint[]) {
-  const sortedBreakpoints = breakpoints.sort((a: IFullBreakpoint, b: IFullBreakpoint) => a.rangeStart - b.rangeStart);
+  const sortedBreakpoints = breakpoints.sort(
+    (a: IFullBreakpoint, b: IFullBreakpoint) => a.rangeStart - b.rangeStart,
+  );
 
   const newBreakpoints: INamelessBreakpoint[] = [];
   let newBreakpointStart: number | null = null;
@@ -12,7 +14,10 @@ export default function compressBreakpoints(breakpoints: IFullBreakpoint[]) {
 
     // Check for end
 
-    if (breakpoints[index + 1] && breakpoint.rangeEnd + 1 !== breakpoints[index + 1].rangeStart) {
+    if (
+      breakpoints[index + 1] &&
+      breakpoint.rangeEnd + 1 !== breakpoints[index + 1].rangeStart
+    ) {
       newBreakpoints.push({
         start: newBreakpointStart,
         end: breakpoint.rangeEnd,

@@ -1,4 +1,8 @@
-import { BreakpointNameType, ILooseBreakpoint, IFullBreakpoint } from "./index.d";
+import {
+  BreakpointNameType,
+  ILooseBreakpoint,
+  IFullBreakpoint,
+} from "./index.d";
 
 export function getCheckBreakpointName() {
   const usedBreakpointNames: BreakpointNameType[] = [];
@@ -6,15 +10,21 @@ export function getCheckBreakpointName() {
     const { name } = breakpoint;
 
     if (typeof name !== "string") {
-      throw new Error(`Breakpoint with index ${index} has invalid name. Expected type string, received ${typeof name}.`);
+      throw new Error(
+        `Breakpoint with index ${index} has invalid name. Expected type string, received ${typeof name}.`,
+      );
     }
 
     if (usedBreakpointNames.includes(name)) {
-      throw new Error(`Breakpoints must have unique names. ${name} is used more than once.`);
+      throw new Error(
+        `Breakpoints must have unique names. ${name} is used more than once.`,
+      );
     }
 
     if (name === "__firstBreakpoint" || name === "__lastBreakpoint") {
-      throw new Error("Breakpoint cannot have name '__firstBreakpoint' or '__lastBreakpoint'");
+      throw new Error(
+        "Breakpoint cannot have name '__firstBreakpoint' or '__lastBreakpoint'",
+      );
     }
 
     usedBreakpointNames.push(name);
@@ -29,16 +39,23 @@ export function getCheckAndNormalizeRanges() {
   return (breakpoint: ILooseBreakpoint): IFullBreakpoint => {
     const newBreakpoint = { ...breakpoint };
 
-    const isRangeStartMissing = newBreakpoint.rangeStart === undefined || newBreakpoint.rangeStart === null;
-    const isRangeEndMissing = newBreakpoint.rangeEnd === undefined || newBreakpoint.rangeEnd === null;
+    const isRangeStartMissing =
+      newBreakpoint.rangeStart === undefined ||
+      newBreakpoint.rangeStart === null;
+    const isRangeEndMissing =
+      newBreakpoint.rangeEnd === undefined || newBreakpoint.rangeEnd === null;
 
     if (isRangeStartMissing && isRangeEndMissing) {
-      throw new Error(`Breakpoint ${newBreakpoint.name} is missing both rangeStart and rangeEnd.`);
+      throw new Error(
+        `Breakpoint ${newBreakpoint.name} is missing both rangeStart and rangeEnd.`,
+      );
     }
 
     if (isRangeStartMissing) {
       if (breakpointWithoutStart) {
-        throw new Error(`There can be only one breakpoint withou rangeStart. ${breakpointWithoutStart} and ${newBreakpoint.name} are both missing rangeStart.`);
+        throw new Error(
+          `There can be only one breakpoint withou rangeStart. ${breakpointWithoutStart} and ${newBreakpoint.name} are both missing rangeStart.`,
+        );
       } else {
         breakpointWithoutStart = newBreakpoint.name;
         newBreakpoint.rangeStart = 0;
@@ -47,7 +64,9 @@ export function getCheckAndNormalizeRanges() {
 
     if (isRangeEndMissing) {
       if (breakpointWithoutEnd) {
-        throw new Error(`There can be only one breakpoint withou rangeEnd. ${breakpointWithoutEnd} and ${newBreakpoint.name} are both missing rangeEnd.`);
+        throw new Error(
+          `There can be only one breakpoint withou rangeEnd. ${breakpointWithoutEnd} and ${newBreakpoint.name} are both missing rangeEnd.`,
+        );
       } else {
         breakpointWithoutEnd = newBreakpoint.name;
         newBreakpoint.rangeEnd = Infinity;
@@ -55,20 +74,30 @@ export function getCheckAndNormalizeRanges() {
     }
 
     if (typeof newBreakpoint.rangeStart !== "number") {
-      throw new Error(`Breakpoint ${newBreakpoint.name} has invalid rangeStart type. Expected number, received ${typeof newBreakpoint.rangeStart}.`);
+      throw new Error(
+        `Breakpoint ${
+          newBreakpoint.name
+        } has invalid rangeStart type. Expected number, received ${typeof newBreakpoint.rangeStart}.`,
+      );
     }
 
     if (typeof newBreakpoint.rangeEnd !== "number") {
-      throw new Error(`Breakpoint ${newBreakpoint.name} has invalid rangeEnd type. Expected number, received ${typeof newBreakpoint.rangeEnd}.`);
+      throw new Error(
+        `Breakpoint ${
+          newBreakpoint.name
+        } has invalid rangeEnd type. Expected number, received ${typeof newBreakpoint.rangeEnd}.`,
+      );
     }
 
     if (newBreakpoint.rangeStart < 0) {
-      throw new Error(`Breakpoint ranges must be greater than 0. startRange for ${newBreakpoint.name} breakpoint is ${newBreakpoint.rangeStart}`);
+      throw new Error(
+        `Breakpoint ranges must be greater than 0. startRange for ${newBreakpoint.name} breakpoint is ${newBreakpoint.rangeStart}`,
+      );
     }
 
     if (newBreakpoint.rangeStart > newBreakpoint.rangeEnd) {
       throw new Error(
-        `rangeStart must be less or equal to rangeEnd. Breakpoint ${newBreakpoint.name} has rangeStart=${newBreakpoint.rangeStart} and rangeEnd=${newBreakpoint.rangeEnd}`
+        `rangeStart must be less or equal to rangeEnd. Breakpoint ${newBreakpoint.name} has rangeStart=${newBreakpoint.rangeStart} and rangeEnd=${newBreakpoint.rangeEnd}`,
       );
     }
 
@@ -103,23 +132,32 @@ export function checkAndAddEdgeRanges(breakpoints: IFullBreakpoint[]) {
   return result;
 }
 
-export function checkRangeContinuity(breakpoint: IFullBreakpoint, index: number, breakpoints: IFullBreakpoint[]) {
+export function checkRangeContinuity(
+  breakpoint: IFullBreakpoint,
+  index: number,
+  breakpoints: IFullBreakpoint[],
+) {
   if (index === breakpoints.length - 1) return breakpoint;
 
   const nextBreakpoint = breakpoints[index + 1];
 
   if (breakpoint.rangeEnd + 1 !== nextBreakpoint.rangeStart) {
     throw new Error(
-      `Ranges are not continuous. Difference between breakpoint ${breakpoint.name} rangeEnd and ${
+      `Ranges are not continuous. Difference between breakpoint ${
+        breakpoint.name
+      } rangeEnd and ${
         nextBreakpoint.name
-      } rangeStart should be 1, but it's ${nextBreakpoint.rangeStart - breakpoint.rangeEnd}`
+      } rangeStart should be 1, but it's ${nextBreakpoint.rangeStart -
+        breakpoint.rangeEnd}`,
     );
   }
 
   return breakpoint;
 }
 
-export default function parseBreakpoints(breakpoints: ILooseBreakpoint[]): IFullBreakpoint[] {
+export default function parseBreakpoints(
+  breakpoints: ILooseBreakpoint[],
+): IFullBreakpoint[] {
   const normalizedBreakpoints = breakpoints
     .map(getCheckBreakpointName())
     .map(getCheckAndNormalizeRanges())

@@ -3,7 +3,14 @@ import parseBreakpoints from "./parseBreakpoints";
 import generateCSSHelper from "./generateCSSHelper";
 import generateMediaQueryLabels from "./generateCSSHelper/generateMediaQueryLabels";
 import limits from "./limitFunctions";
-import { BreakpointNameType, IFullBreakpointMap, IFullBreakpoint, IBreakpointConditions, ILooseBreakpoint, ISpreadStyles } from "./index.d";
+import {
+  BreakpointNameType,
+  IFullBreakpointMap,
+  IFullBreakpoint,
+  IBreakpointConditions,
+  ILooseBreakpoint,
+  ISpreadStyles,
+} from "./index.d";
 
 export default class Media {
   breakpoints: IFullBreakpoint[];
@@ -19,40 +26,66 @@ export default class Media {
         ...accumulator,
         [breakpoint.name]: breakpoint,
       }),
-      {}
+      {},
     );
-    this.breakpointNames = this.breakpoints.map((breakpoint: IFullBreakpoint) => breakpoint.name);
+    this.breakpointNames = this.breakpoints.map(
+      (breakpoint: IFullBreakpoint) => breakpoint.name,
+    );
   }
 
   _checkBreakpointNames(...breakpointNames: BreakpointNameType[]) {
-    const breakpointNamesArray = Array.isArray(breakpointNames) ? breakpointNames : [breakpointNames];
+    const breakpointNamesArray = Array.isArray(breakpointNames)
+      ? breakpointNames
+      : [breakpointNames];
 
     breakpointNamesArray.forEach(breakpointName => {
       if (typeof breakpointName !== "string") {
-        throw new Error(`Breakpoint name must be a string, received ${typeof breakpointName}`);
+        throw new Error(
+          `Breakpoint name must be a string, received ${typeof breakpointName}`,
+        );
       }
 
       if (!this.breakpointNames.includes(breakpointName)) {
-        throw new Error(`Breakpoint name ${breakpointName} is invalid. Possible names: ${this.breakpointNames.join(", ")}`);
+        throw new Error(
+          `Breakpoint name ${breakpointName} is invalid. Possible names: ${this.breakpointNames.join(
+            ", ",
+          )}`,
+        );
       }
     });
   }
 
-  _getWithFunction(breakpoints: IFullBreakpoint[], conditions: IBreakpointConditions) {
+  _getWithFunction(
+    breakpoints: IFullBreakpoint[],
+    conditions: IBreakpointConditions,
+  ) {
     return (breakpointName: string) => {
       if (breakpoints.some(breakpoint => breakpoint.name === breakpointName)) {
         return this._getReturnFunction(breakpoints, conditions);
       }
 
-      return this._getReturnFunction([...breakpoints, this.breakpointsMap[breakpointName]], conditions);
+      return this._getReturnFunction(
+        [...breakpoints, this.breakpointsMap[breakpointName]],
+        conditions,
+      );
     };
   }
 
-  _getWithoutFunction(breakpoints: IFullBreakpoint[], conditions: IBreakpointConditions) {
-    return (breakpointName: string) => this._getReturnFunction(breakpoints.filter(breakpoint => breakpoint.name !== breakpointName), conditions);
+  _getWithoutFunction(
+    breakpoints: IFullBreakpoint[],
+    conditions: IBreakpointConditions,
+  ) {
+    return (breakpointName: string) =>
+      this._getReturnFunction(
+        breakpoints.filter(breakpoint => breakpoint.name !== breakpointName),
+        conditions,
+      );
   }
 
-  _getAndFunction(breakpoints: IFullBreakpoint[], conditions: IBreakpointConditions) {
+  _getAndFunction(
+    breakpoints: IFullBreakpoint[],
+    conditions: IBreakpointConditions,
+  ) {
     return (boolean: boolean) =>
       this._getReturnFunction(breakpoints, {
         ...conditions,
@@ -60,7 +93,10 @@ export default class Media {
       });
   }
 
-  _getOrFunction(breakpoints: IFullBreakpoint[], conditions: IBreakpointConditions) {
+  _getOrFunction(
+    breakpoints: IFullBreakpoint[],
+    conditions: IBreakpointConditions,
+  ) {
     return (boolean: boolean) =>
       this._getReturnFunction(breakpoints, {
         ...conditions,
@@ -69,7 +105,10 @@ export default class Media {
   }
 
   _getReturnFunction(breakpoints: IFullBreakpoint[], conditions = {}) {
-    const returnFunction = (...args) => generateCSSHelper(breakpoints, args, conditions);
+    const returnFunction = (
+      literals: TemplateStringsArray,
+      ...placeholders: any[]
+    ) => generateCSSHelper(breakpoints, conditions, literals, ...placeholders);
     returnFunction.with = this._getWithFunction(breakpoints, conditions);
     returnFunction.without = this._getWithoutFunction(breakpoints, conditions);
     returnFunction.or = this._getOrFunction(breakpoints, conditions);
@@ -115,42 +154,64 @@ export default class Media {
 
   between(startBreakpointName: string, endBreakpointName: string) {
     this._checkBreakpointNames(startBreakpointName, endBreakpointName);
-    const correctBreakpoints = limits.between(this.breakpoints, startBreakpointName, endBreakpointName);
+    const correctBreakpoints = limits.between(
+      this.breakpoints,
+      startBreakpointName,
+      endBreakpointName,
+    );
     return this._getReturnFunction(correctBreakpoints);
   }
 
   betweenAnd(startBreakpointName: string, endBreakpointName: string) {
     this._checkBreakpointNames(startBreakpointName, endBreakpointName);
-    const correctBreakpoints = limits.betweenAnd(this.breakpoints, startBreakpointName, endBreakpointName);
+    const correctBreakpoints = limits.betweenAnd(
+      this.breakpoints,
+      startBreakpointName,
+      endBreakpointName,
+    );
     return this._getReturnFunction(correctBreakpoints);
   }
 
   outside(startBreakpointName: string, endBreakpointName: string) {
     this._checkBreakpointNames(startBreakpointName, endBreakpointName);
-    const correctBreakpoints = limits.outside(this.breakpoints, startBreakpointName, endBreakpointName);
+    const correctBreakpoints = limits.outside(
+      this.breakpoints,
+      startBreakpointName,
+      endBreakpointName,
+    );
     return this._getReturnFunction(correctBreakpoints);
   }
 
   outsideAnd(startBreakpointName: string, endBreakpointName: string) {
     this._checkBreakpointNames(startBreakpointName, endBreakpointName);
-    const correctBreakpoints = limits.outsideAnd(this.breakpoints, startBreakpointName, endBreakpointName);
+    const correctBreakpoints = limits.outsideAnd(
+      this.breakpoints,
+      startBreakpointName,
+      endBreakpointName,
+    );
 
     return this._getReturnFunction(correctBreakpoints);
   }
 
   spread(styles: ISpreadStyles) {
-    return (...args) =>
-      this.breakpoints.map(({ name, rangeStart, rangeEnd }: IFullBreakpoint) => {
-        const styleToUse = styles[name] || styles.default;
+    return (literals: TemplateStringsArray, ...placeholders: any[]) =>
+      this.breakpoints.map(
+        ({ name, rangeStart, rangeEnd }: IFullBreakpoint) => {
+          const styleToUse = styles[name] || styles.default;
 
-        // @ts-ignore
-        const generatedCSS = args.length === 0 ? null : css(...args.map(arg => (typeof arg === "function" ? arg(styleToUse) : arg)));
+          const generatedCSS = css(
+            literals,
+            ...placeholders.map(arg =>
+              typeof arg === "function" ? arg(styleToUse) : arg,
+            ),
+          );
 
-        return css`
-          ${generateMediaQueryLabels({ start: rangeStart, end: rangeEnd })} {
-            ${generatedCSS}
-          }
-        `;
-      });
+          return css`
+            ${generateMediaQueryLabels({ start: rangeStart, end: rangeEnd })} {
+              ${generatedCSS}
+            }
+          `;
+        },
+      );
   }
 }

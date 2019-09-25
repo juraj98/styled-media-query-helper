@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/juraj98/styled-media-query-helper#readme",
   "devDependencies": {
+    "@types/styled-components": "^4.1.19",
     "eslint": "^6.2.2",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.1.0",

@@ -19,5 +19,5 @@ export default {
   downAnd,
   not,
   outside,
-  up
+  up,
 };
