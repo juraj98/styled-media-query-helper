@@ -1,6 +1,6 @@
 {
   "name": "styled-media-query-helper",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "",
   "main": "build/index.js",
   "scripts": {
@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/juraj98/styled-media-query-helper#readme",
   "devDependencies": {
-    "@types/styled-components": "^4.1.19",
+    "@types/styled-components": "4.1.8",
     "eslint": "^6.2.2",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.1.0",
