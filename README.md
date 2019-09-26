@@ -88,15 +88,15 @@ const Button = styled.button`
 To use `styled-media-query-helper` first you need to create instance of Media as such:
 
 ```javascript
-import Media from 'styled-media-query-helper';
+import Media from "styled-media-query-helper";
 
-const media = Media([{
+const media = Media([
   { name: "tiny", rangeStart: 0, rangeEnd: 375 },
   { name: "small", rangeStart: 376, rangeEnd: 757 },
   { name: "medium", rangeStart: 758, rangeEnd: 991 },
   { name: "large", rangeStart: 992, rangeEnd: 1399 },
-  { name: "extraLarge", rangeStart: 1400, rangeEnd: Infinity }
-}])
+  { name: "extraLarge", rangeStart: 1400, rangeEnd: Infinity },
+]);
 ```
 
 Constructor takes one argument that is array of objects with this shape:
