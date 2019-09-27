@@ -2,7 +2,7 @@
 **
 
 # Whitelist
-!/build
+!/build/**/*
 !LICENSE
 !README.md
 !package.json
