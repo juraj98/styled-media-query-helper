@@ -1,4 +1,4 @@
-import { BreakpointNameType, IFullBreakpoint } from "../index.d";
+import { BreakpointNameType, IFullBreakpoint } from "../definitions";
 
 export default function outsideAnd(
   breakpoints: IFullBreakpoint[],

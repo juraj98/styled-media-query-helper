@@ -1,4 +1,4 @@
-import { IFullBreakpoint, INamelessBreakpoint } from "../index.d";
+import { IFullBreakpoint, INamelessBreakpoint } from "../definitions";
 
 export default function compressBreakpoints(breakpoints: IFullBreakpoint[]) {
   const sortedBreakpoints = breakpoints.sort(

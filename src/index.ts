@@ -10,7 +10,16 @@ import {
   IBreakpointConditions,
   ILooseBreakpoint,
   ISpreadStyles,
-} from "./index.d";
+} from "./definitions";
+
+export {
+  BreakpointNameType,
+  IFullBreakpointMap,
+  IFullBreakpoint,
+  IBreakpointConditions,
+  ILooseBreakpoint,
+  ISpreadStyles,
+};
 
 export default class Media {
   breakpoints: IFullBreakpoint[];

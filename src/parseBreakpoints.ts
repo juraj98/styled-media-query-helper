@@ -2,7 +2,7 @@ import {
   BreakpointNameType,
   ILooseBreakpoint,
   IFullBreakpoint,
-} from "./index.d";
+} from "./definitions";
 
 export function getCheckBreakpointName() {
   const usedBreakpointNames: BreakpointNameType[] = [];

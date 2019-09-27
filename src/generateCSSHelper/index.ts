@@ -1,7 +1,7 @@
 import { css } from "styled-components";
 import compressBreakpoints from "./compressBreakpoints";
 import generateMediaQueryLabels from "./generateMediaQueryLabels";
-import { IFullBreakpoint, IBreakpointConditions } from "../index.d";
+import { IFullBreakpoint, IBreakpointConditions } from "../definitions";
 
 export default function generateCSSHelper(
   breakpoints: IFullBreakpoint[],

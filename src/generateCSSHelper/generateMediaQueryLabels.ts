@@ -1,4 +1,4 @@
-import { INamelessBreakpoint } from "../index.d";
+import { INamelessBreakpoint } from "../definitions";
 
 export default function generateMediaQueryLabels({
   start,
